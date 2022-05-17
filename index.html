@@ -6,12 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>8Sidor Translator</title>
     <style>
+      html,
+      body,
+      main {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+
       main,
       form {
+        display: grid;
+        place-items: center;
+        gap: 1rem;
+      }
+
+      label {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
+        gap: 0.5rem;
       }
     </style>
   </head>
@@ -20,7 +33,7 @@
       <form method="post">
         <label>
           8Sidor URL:
-          <input type="url" />
+          <input autofocus type="url" />
         </label>
         <button type="submit">Translate</button>
       </form>
@@ -45,12 +58,16 @@
         openWithTranslate(input.value);
       });
 
-      const searchParams = new URLSearchParams(window.location.search);
-      const urlParam = searchParams.get('url');
-
-      if (urlParam) {
-        openWithTranslate(urlParam);
+      async function onLoad() {
+        if (!'clipboard' in navigator) return; // 🤢
+        const cbText = await navigator.clipboard.readText();
+        if (cbText.startsWith('https://8sidor.se')) {
+          input.value = cbText;
+          input.select();
+        }
       }
+
+      onLoad();
     </script>
   </body>
 </html>
