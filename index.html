@@ -16,10 +16,23 @@
         font-size: 20px;
       }
 
-      main,
+      main {
+        display: flex;
+        flex-direction: column;
+      }
+
+      p {
+        align-self: center;
+        margin: 2rem 3rem;
+        max-width: 1024px;
+      }
+
       form {
-        display: grid;
-        place-items: center;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         gap: 1rem;
       }
 
@@ -41,6 +54,18 @@
   </head>
   <body>
     <main>
+      <p>
+        I read news on
+        <a href="https://8sidor.se" target="_blank">8sidor.se</a>. My Swedish
+        level is beginner, so I translate them to English for better
+        understanding. This page is a shortcut so I don't have to open Google
+        Translate every time. Use it freely -
+        <a
+          href="https://www.thelocal.se/20190111/swedish-word-of-the-day-varsagod/"
+          target="_blank"
+          >varsågod</a
+        >!
+      </p>
       <form method="post">
         <label>
           8Sidor URL:
