@@ -62,6 +62,8 @@
         translateUrl.search = '?_x_tr_sl=sv&_x_tr_tl=en';
 
         window.open(translateUrl, '_blank');
+        input.value = '';
+        input.focus();
       };
 
       form.addEventListener('submit', (evt) => {
