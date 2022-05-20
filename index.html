@@ -46,6 +46,12 @@
         gap: 0.5rem;
       }
 
+      .buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
       button,
       input {
         font-family: inherit;
@@ -75,12 +81,18 @@
           8Sidor URL:
           <input autofocus required type="url" />
         </label>
-        <button type="submit">Translate</button>
+        <div class="buttons">
+          <button class="translate" type="submit">Translate</button>
+          <button class="reload" type="button">🔁 Reload</button>
+        </div>
       </form>
     </main>
     <script type="text/javascript">
       const form = document.querySelector('form');
       const input = document.querySelector('input');
+      const reload = document.querySelector('.reload');
+
+      reload.addEventListener('click', () => window.location.reload());
 
       const openWithTranslate = (url) => {
         const siteUrl = new URL(url);
