@@ -44,6 +44,8 @@
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
+        width: 90%;
+        max-width: 70ch;
       }
 
       .buttons {
@@ -59,6 +61,10 @@
         border: 1px solid #ccc;
         border-radius: 4px;
         padding: 0.4rem 0.5rem;
+      }
+
+      input {
+        width: 90%;
       }
     </style>
   </head>
@@ -89,8 +95,10 @@
     <script type="text/javascript">
       const form = document.querySelector('form');
       const input = document.querySelector('input');
+      let lastUrl = '';
 
-      const openWithTranslate = (url) => {
+      function openWithTranslate(url) {
+        lastUrl = url;
         const siteUrl = new URL(url);
         const translateUrl = new URL(
           siteUrl.pathname,
@@ -101,7 +109,7 @@
         window.open(translateUrl, '_blank');
         input.value = '';
         input.focus();
-      };
+      }
 
       form.addEventListener('submit', (evt) => {
         evt.preventDefault();
@@ -111,13 +119,15 @@
       async function onLoad() {
         if (!'clipboard' in navigator) return; // 🤢
         const cbText = await navigator.clipboard.readText();
-        if (cbText.startsWith('https://8sidor.se')) {
+        if (cbText.startsWith('https://8sidor.se') && cbText !== lastUrl) {
           input.value = cbText;
           input.select();
         }
       }
 
       onLoad();
+
+      input.addEventListener('focus', onLoad);
     </script>
   </body>
 </html>
